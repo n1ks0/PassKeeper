@@ -61,13 +61,6 @@ public class PostgresContext : DbContext, IDbContext
         return set.Where(predicate);
     }
 
-    public async Task<T> FindFirstByConditionAsync<T>(Expression<Func<T, bool>> predicate, bool trackChanges = false,
-        params string[] includeProperties)
-        where T : class
-    {
-        return await FindByCondition(predicate, trackChanges, includeProperties).FirstOrDefaultAsync();
-    }
-
     public IQueryable<T> GetQueryable<T>(bool trackChanges = false) where T : class
     {
         return trackChanges ? Set<T>() : Set<T>().AsNoTracking();

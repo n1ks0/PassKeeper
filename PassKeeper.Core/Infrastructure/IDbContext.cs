@@ -11,8 +11,7 @@ public interface IDbContext : IDisposable, IAsyncDisposable
     Task<int> ExecuteSqlRawAsync(string sql, params object[] parameters);
     IQueryable<T> FindByCondition<T>(Expression<Func<T, bool>> predicate, bool trackChanges = false,
         params string[] includeProperties) where T : class;
-    Task<T> FindFirstByConditionAsync<T>(Expression<Func<T, bool>> predicate, bool trackChanges = false,
-        params string[] includeProperties) where T : class;
+
     IQueryable<T> GetQueryable<T>(bool trackChanges = false) where T : class;
 
     Task<List<T>> ToListAsync<T>(IQueryable<T> query);

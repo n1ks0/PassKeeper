@@ -9,8 +9,9 @@ public class AccountManager(IDbContextFactory contextFactory) : IAccountManager
     public async Task<IOperationResult> LoginAsync(string email, string password)
     {
         await using var dbContext = await contextFactory.CreateDbContextAsync();
-        var user = await dbContext
-            .FindFirstByConditionAsync<User>(x => x.Email.ToLower() == email && x.Password == password);
+        var userQuery = dbContext
+            .FindByCondition<User>(x => x.Email.ToLower() == email && x.Password == password);
+        var user = dbContext.FirstOrDefaultAsync(userQuery);
         return user == null ? OperationResult.Fail("Invalid email or password") : OperationResult.Success();
     }
 
@@ -54,6 +55,7 @@ public class AccountManager(IDbContextFactory contextFactory) : IAccountManager
 
     private async Task<User> GetUserByEmailAsync(IDbContext dbContext, string email)
     {
-        return await dbContext.FindFirstByConditionAsync<User>(x => x.Email.ToLower() == email.ToLower(), true);
+        var userQuery = dbContext.FindByCondition<User>(x => x.Email.ToLower() == email.ToLower(), true);
+        return await dbContext.FirstOrDefaultAsync(userQuery);
     }
 }
