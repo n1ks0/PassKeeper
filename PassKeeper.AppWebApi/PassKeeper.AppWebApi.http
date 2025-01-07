@@ -1,0 +1,6 @@
+@PassKeeper.AppWebApi_HostAddress = http://localhost:5109
+
+GET {{PassKeeper.AppWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
