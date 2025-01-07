@@ -13,7 +13,7 @@ public class DbContextTests
     public async Task Add_SingleEntity_AddedSingleEntity()
     {
         //Arrange
-        await using var dbContext = await CreateFakeDbContextFactory().CreateDbContextAsync();
+        await using var dbContext = await CreateFakeDbContextFactory(CreateMockedDbContext()).CreateDbContextAsync();
         
         var userToAdd = new User("Test", "Test", "Test", UserRole.User);
         
@@ -26,10 +26,28 @@ public class DbContextTests
         var users = await dbContext.ToListAsync(usersQuery);
         
         //Assert
-        Assert.That(users.Count, Is.EqualTo(expectedResult));
+        Assert.That(users, Has.Count.EqualTo(expectedResult));
     }
 
-    private static IDbContextFactory CreateFakeDbContextFactory()
+    [Test]
+    public async Task Remove_SingleEntity_RemovedSingleEntity()
+    {
+        //Arrange
+        var mockedDbContext = CreateMockedDbContext();
+        var user = new User("Test", "Test", "Test", UserRole.User);
+        await mockedDbContext.Users.AddAsync(user);
+        await mockedDbContext.SaveChangesAsync();
+        var dbContext = await CreateFakeDbContextFactory(mockedDbContext).CreateDbContextAsync();
+        
+        //Act
+        await dbContext.DeleteAsync<User>(user.Id);
+        var deletedCount = await dbContext.SaveChangesAsync();
+        
+        //Assert
+        Assert.That(deletedCount, Is.EqualTo(1));
+    }
+
+    private static PostgresContext CreateMockedDbContext()
     {
         var options = new DbContextOptionsBuilder<PostgresContext>().UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
@@ -38,9 +56,14 @@ public class DbContextTests
             .UseDbContext(dbContextToMock)
             .UseConstructorWithParameters(options)
             .MockedDbContext;
+        return mockedDbContext;
+    }
+
+    private static IDbContextFactory CreateFakeDbContextFactory(PostgresContext postgresContext)
+    {
         var fakeContextFactory = new Mock<IDbContextFactory>();
         fakeContextFactory.Setup(x => x.CreateDbContextAsync())
-            .ReturnsAsync(mockedDbContext);
+            .ReturnsAsync(postgresContext);
         var factory = fakeContextFactory.Object;
         return factory;
     }

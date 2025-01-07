@@ -33,7 +33,6 @@ public class AccountManager(IDbContextFactory contextFactory) : IAccountManager
     public async Task<IOperationResult> ChangePasswordAsync(string email, string oldPassword, string newPassword)
     {
         await using var dbContext = await contextFactory.CreateDbContextAsync();
-
         var user = await GetUserByEmailAsync(dbContext, email);
 
         if (user == null)
