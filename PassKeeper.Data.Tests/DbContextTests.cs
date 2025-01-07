@@ -10,7 +10,7 @@ namespace PassKeeper.Data.Tests;
 public class DbContextTests
 {
     [Test]
-    public async Task Add_SingleEntity_AddedSingleEntity()
+    public async Task AddAsync_SingleEntity_AddedSingleEntity()
     {
         //Arrange
         await using var dbContext = await CreateFakeDbContextFactory(CreateMockedDbContext()).CreateDbContextAsync();
@@ -30,7 +30,7 @@ public class DbContextTests
     }
 
     [Test]
-    public async Task Remove_SingleEntity_RemovedSingleEntity()
+    public async Task DeleteAsync_SingleEntity_RemovedSingleEntity()
     {
         //Arrange
         var mockedDbContext = CreateMockedDbContext();
