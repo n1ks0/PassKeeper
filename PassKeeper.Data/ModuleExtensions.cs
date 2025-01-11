@@ -14,6 +14,6 @@ public static class ModuleExtensions
         {
             options.UseNpgsql(configuration.GetConnectionString("Postgres"));
         });
-        serviceCollection.AddSingleton<IDbContextFactory, DbContextFactory>();
+        serviceCollection.AddSingleton<IDbContextFactory, EfContextFactory>();
     }
 }
