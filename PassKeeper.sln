@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper.Data.Tests", "Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper.Core.Tests", "PassKeeper.Core.Tests\PassKeeper.Core.Tests.csproj", "{5308EFC7-8DE3-4711-87C3-6660CC8A9FC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper.WinApp", "PassKeeper.WinApp\PassKeeper.WinApp.csproj", "{4E2C9B15-774A-46EC-881B-202663C24F20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{5308EFC7-8DE3-4711-87C3-6660CC8A9FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5308EFC7-8DE3-4711-87C3-6660CC8A9FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5308EFC7-8DE3-4711-87C3-6660CC8A9FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2C9B15-774A-46EC-881B-202663C24F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2C9B15-774A-46EC-881B-202663C24F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2C9B15-774A-46EC-881B-202663C24F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2C9B15-774A-46EC-881B-202663C24F20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

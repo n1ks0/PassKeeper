@@ -12,7 +12,7 @@ public interface IDbContext : IDisposable, IAsyncDisposable
     IQueryable<T> FindByCondition<T>(Expression<Func<T, bool>> predicate, bool trackChanges = false,
         params string[] includeProperties) where T : class;
 
-    IQueryable<T> GetQueryable<T>(bool trackChanges = false) where T : class;
+    IQueryable<T> GetAll<T>(bool trackChanges = false) where T : class;
 
     Task<List<T>> ToListAsync<T>(IQueryable<T> query);
     Task<T> FirstOrDefaultAsync<T>(IQueryable<T> query);

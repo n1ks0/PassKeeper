@@ -22,7 +22,7 @@ public class DbContextTests
         //Act
         await dbContext.AddAsync(userToAdd);
         await dbContext.SaveChangesAsync();
-        var usersQuery = dbContext.GetQueryable<User>();
+        var usersQuery = dbContext.GetAll<User>();
         var users = await dbContext.ToListAsync(usersQuery);
         
         //Assert
@@ -68,7 +68,7 @@ public class DbContextTests
         };
         await dbContext.UpdateAsync(userToUpdate);
         var updatedCount = await dbContext.SaveChangesAsync();
-        var usersQuery = dbContext.GetQueryable<User>();
+        var usersQuery = dbContext.GetAll<User>();
         user = await dbContext.FirstOrDefaultAsync(usersQuery);
         
         //Assert

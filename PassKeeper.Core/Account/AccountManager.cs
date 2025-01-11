@@ -64,6 +64,6 @@ public class AccountManager(IDbContextFactory contextFactory, IEncode encoder) :
     private async Task<User> GetUserByEmailAsync(IDbContext dbContext, string email)
     {
         var userQuery = dbContext.FindByCondition<User>(x => x.Email.ToLower() == email.ToLower(), true);
-        return await dbContext.FirstOrDefaultAsync(userQuery).ConfigureAwait(false);
+        return await dbContext.FirstOrDefaultAsync(userQuery);
     }
 }

@@ -61,7 +61,7 @@ public class PostgresContext : DbContext, IDbContext
         return set.Where(predicate);
     }
 
-    public IQueryable<T> GetQueryable<T>(bool trackChanges = false) where T : class
+    public IQueryable<T> GetAll<T>(bool trackChanges = false) where T : class
     {
         return trackChanges ? Set<T>() : Set<T>().AsNoTracking();
     }
