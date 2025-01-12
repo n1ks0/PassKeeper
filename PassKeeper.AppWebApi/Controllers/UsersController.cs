@@ -11,7 +11,7 @@ namespace PassKeeper.AppWebApi.Controllers;
 [Route("api/[controller]")]
 public class UsersController(IDbContextFactory dbContextFactory) : ControllerBase
 {
-    [HttpGet("getall")]
+    [HttpGet("GetAll")]
     public async IAsyncEnumerable<User> GetAll([EnumeratorCancellation] CancellationToken cancellationToken)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync();
@@ -19,7 +19,7 @@ public class UsersController(IDbContextFactory dbContextFactory) : ControllerBas
             yield return user;
     }
     
-    [HttpGet("getbyid")]
+    [HttpGet("GetById")]
     public async Task<Results<Ok<User>, NotFound>> GetById(Guid id)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync();

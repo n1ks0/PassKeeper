@@ -1,3 +1,4 @@
+using PassKeeper.Core;
 using PassKeeper.Data;
 
 namespace PassKeeper.AppWebApi;
@@ -13,6 +14,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddSwaggerGen();
         builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddCoreModule();
         builder.Services.AddDataModule(builder.Configuration);
 
         var app = builder.Build();
