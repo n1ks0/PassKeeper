@@ -10,8 +10,9 @@ public class Program
         
         builder.Services.AddAuthorization();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        builder.Services.AddOpenApi();
         builder.Services.AddControllers();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddDataModule(builder.Configuration);
 
         var app = builder.Build();
@@ -19,13 +20,17 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI(options => 
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
         }
 
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
-        app.MapControllerRoute(name: "default", pattern: "api/{controller}/{action}");
         app.Run();
     }
 }
