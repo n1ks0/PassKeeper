@@ -12,7 +12,7 @@ public static class ModuleExtensions
     {
         serviceCollection.AddPooledDbContextFactory<PostgresContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("Postgres"));
+            options.UseNpgsql(configuration.GetConnectionString("PassKeeper"));
         });
         serviceCollection.AddSingleton<IDbContextFactory, EfContextFactory>();
     }

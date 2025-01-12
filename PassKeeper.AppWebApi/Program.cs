@@ -15,8 +15,6 @@ public class Program
         builder.Services.AddDataModule(builder.Configuration);
 
         var app = builder.Build();
-
-        app.MapDefaultControllerRoute();
         
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -25,9 +23,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-        
+        app.MapControllers();
+        app.MapControllerRoute(name: "default", pattern: "api/{controller}/{action}");
         app.Run();
     }
 }
